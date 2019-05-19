@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
 import * as enzyme from 'enzyme';
+import App from './App';
+import TodoList from './TodoList/TodoList';
+import TodoSearchAdd from './TodoSearchAdd/TodoSearchAdd';
 
 describe('main App component', () => {
   it('renders without crashing', () => {
@@ -12,9 +14,13 @@ describe('main App component', () => {
 
   it('renders TodoList component', () => {
     const app = enzyme.shallow(<App/>);
-    expect(app.children('TodoList').exists()).toBe(true);
-  })
+    expect(app.children(TodoList).exists()).toBe(true);
+  });
   
+  it('renders TodoSearchAdd component', () => {
+    const app = enzyme.shallow(<App/>);
+    expect(app.children(TodoSearchAdd).exists()).toBe(true);
+  });
 });
 
 
