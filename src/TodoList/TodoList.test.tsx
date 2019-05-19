@@ -7,4 +7,29 @@ describe('TodoList component', () => {
         const todoList = enzyme.shallow(<TodoList/>);
         expect(todoList.exists()).toBe(true);
     })
+
+    it('is a div', () => {
+        const todoList = enzyme.shallow(<TodoList/>);
+        expect(todoList.is('div')).toBe(true);
+    })
+    
+    it('has class of TodoList', () => {
+        const todoList = enzyme.shallow(<TodoList/>);
+        expect(todoList.hasClass('TodoList')).toBe(true);
+    })
+    
+    it('has state', () => {
+        const todoList = enzyme.shallow(<TodoList/>);
+        expect(todoList.state()).toBeDefined()
+    })
+    
+    it('has state with list of todos', () => {
+        const todoList = enzyme.shallow(<TodoList/>);
+        expect(todoList.state('todos')).toEqual([]);
+    })
+    
+    // it('renders todos as h4 elements', () => {
+    //     const todoList = enzyme.shallow(<TodoList/>);
+        
+    // })
 })
