@@ -1,5 +1,9 @@
 import React from 'react';
 
 export default () => {
-    return null;
+    return (
+        <form className='TodoSearchAdd'>
+            <input type='text'/>
+        </form>
+    );
 }
