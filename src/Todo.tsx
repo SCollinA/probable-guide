@@ -34,6 +34,7 @@ class Todo extends React.Component<Props, State> {
       <div className="Todo">
           <TodoSearchAdd
             addTodo={this.addTodo}
+            updateSearchTerm={this.updateSearchTerm}
           />
           <TodoList/>
       </div>

@@ -2,6 +2,7 @@ import React from "react";
 
 interface Props {
     addTodo?: (newTodo: string) => void;
+    updateSearchTerm?: (todoTerm: string) => void;
 }
 
 export default (props: Props) => {
