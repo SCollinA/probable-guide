@@ -43,7 +43,7 @@ describe("main Todo component", () => {
     const todo = enzyme.shallow<Todo>(<Todo/>);
     todo.instance().addTodo("go shopping");
     expect(todo.state().todos).toContain("go shopping");
-  })
+  });
 
   it("renders TodoList component", () => {
     const todo = enzyme.shallow(<Todo/>);
@@ -53,6 +53,11 @@ describe("main Todo component", () => {
   it("renders TodoSearchAdd component", () => {
     const todo = enzyme.shallow(<Todo/>);
     expect(todo.children(TodoSearchAdd).exists()).toBe(true);
+  });
+
+  it("passes addTodo to TodoSearchAdd component", () => {
+    const todo = enzyme.shallow(<Todo/>);
+    expect(todo.children(TodoSearchAdd).props()).toHaveProperty("addTodo");
   });
 });
 

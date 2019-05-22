@@ -32,7 +32,9 @@ class Todo extends React.Component<Props, State> {
   render() {
     return (
       <div className="Todo">
-          <TodoSearchAdd/>
+          <TodoSearchAdd
+            addTodo={this.addTodo}
+          />
           <TodoList/>
       </div>
     );

@@ -1,6 +1,10 @@
 import React from "react";
 
-export default () => {
+interface Props {
+    addTodo?: (newTodo: string) => void;
+}
+
+export default (props: Props) => {
     return (
         <form className="TodoSearchAdd">
             <input type="text"/>
