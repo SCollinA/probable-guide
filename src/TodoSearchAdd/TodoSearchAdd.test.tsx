@@ -27,4 +27,8 @@ describe("TodoSearchAdd component", () => {
         const todoSearchAdd = enzyme.shallow(<TodoSearchAdd/>);
         expect(todoSearchAdd.children('input[type="submit"]').exists()).toBe(true);
     });
+
+    // it("adds a new todo if no search results", () => {
+    //     expect(true).toBe(true);
+    // });
 });

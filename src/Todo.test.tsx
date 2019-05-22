@@ -17,10 +17,11 @@ describe("main Todo component", () => {
     expect(todo.state()).toBeDefined();
   });
 
-  it("has state with list of todos and todoTerm", () => {
+  it("has state with list of todos and searchTerm and searchResults", () => {
     const todoList = enzyme.shallow(<Todo/>);
     expect(todoList.state("todos")).toEqual([]);
-    expect(todoList.state("todoTerm")).toEqual("");
+    expect(todoList.state("searchTerm")).toEqual("");
+    expect(todoList.state("searchResults")).toEqual([]);
   });
 
   it("has a updateSearchTerm method", () => {
@@ -28,19 +29,19 @@ describe("main Todo component", () => {
     expect(todo.instance().updateSearchTerm).toBeDefined();
   });
 
-  it("filters todos by todoTerm", () => {
+  it("filters todos by searchTerm for search results", () => {
     const todo = enzyme.shallow<Todo>(<Todo/>);
     const todoInstance = todo.instance();
     todoInstance.addTodo("go shopping");
     todoInstance.addTodo("mow lawn");
     todoInstance.updateSearchTerm("mow");
-    expect(todoInstance.state.todos).toEqual(["mow lawn"]);
+    expect(todoInstance.state.searchResults).toEqual(["mow lawn"]);
   });
 
   it("updates search term in state", () => {
     const todo = enzyme.shallow<Todo>(<Todo/>);
     todo.instance().updateSearchTerm("hello");
-    expect(todo.state().todoTerm).toBe("hello");
+    expect(todo.state().searchTerm).toBe("hello");
   });
 
   it("has a addTodo method", () => {

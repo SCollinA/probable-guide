@@ -6,7 +6,8 @@ import TodoSearchAdd from "./TodoSearchAdd/TodoSearchAdd";
 interface Props {}
 interface State {
   todos: string[];
-  todoTerm: string;
+  searchTerm: string;
+  searchResults: string[];
 }
 
 class Todo extends React.Component<Props, State> {
@@ -14,13 +15,14 @@ class Todo extends React.Component<Props, State> {
     super(props);
     this.state = {
       todos: [],
-      todoTerm: "",
+      searchTerm: "",
+      searchResults: [],
     };
   }
 
-  updateSearchTerm = (todoTerm: string) => this.setState({
-    todoTerm,
-    todos: this.state.todos.filter(todo => todo.includes(todoTerm))
+  updateSearchTerm = (searchTerm: string) => this.setState({
+    searchTerm,
+    searchResults: this.state.todos.filter(todo => todo.includes(searchTerm))
   });
 
   addTodo = (newTodo: string) => this.setState({
