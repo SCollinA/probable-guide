@@ -27,7 +27,8 @@ class Todo extends React.Component<Props, State> {
       []
   });
 
-  addTodo = (newTodo: string) => {
+  addTodo = () => {
+    const newTodo = this.state.searchTerm;
     if (!this.state.todos.includes(newTodo)) {
       this.setState({
         todos: [

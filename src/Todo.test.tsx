@@ -32,8 +32,10 @@ describe("main Todo component", () => {
   it("filters todos by searchTerm for search results", () => {
     const todo = enzyme.shallow<Todo>(<Todo/>);
     const todoInstance = todo.instance();
-    todoInstance.addTodo("go shopping");
-    todoInstance.addTodo("mow lawn");
+    todoInstance.updateSearchTerm("go shopping");
+    todoInstance.addTodo();
+    todoInstance.updateSearchTerm("mow lawn");
+    todoInstance.addTodo();
     todoInstance.updateSearchTerm("mow");
     expect(todoInstance.state.searchResults).toEqual(["mow lawn"]);
   });
@@ -51,7 +53,8 @@ describe("main Todo component", () => {
 
   it("adds a todo to state", () => {
     const todo = enzyme.shallow<Todo>(<Todo/>);
-    todo.instance().addTodo("go shopping");
+    todo.instance().updateSearchTerm("go shopping");
+    todo.instance().addTodo();
     expect(todo.state().todos).toContain("go shopping");
   });
 
@@ -88,8 +91,10 @@ describe("main Todo component", () => {
   it("passes searchResults from state to TodoList when searching", () => {
     const todo = enzyme.shallow<Todo>(<Todo/>);
     const todoInstance = todo.instance();
-    todoInstance.addTodo("mow lawn");
-    todoInstance.addTodo("go shopping");
+    todoInstance.updateSearchTerm("mow lawn");
+    todoInstance.addTodo();
+    todoInstance.updateSearchTerm("go shopping");
+    todoInstance.addTodo();
     todoInstance.updateSearchTerm("mow");
     expect(todo.children(TodoList).props().todos).toContain("mow lawn");
     expect(todo.children(TodoList).props().todos).not.toContain("go shopping");
@@ -98,9 +103,12 @@ describe("main Todo component", () => {
   it("does not add a todo to state if it already exists", () => {
     const todo = enzyme.shallow<Todo>(<Todo/>);
     const todoInstance = todo.instance();
-    todoInstance.addTodo("mow lawn");
-    todoInstance.addTodo("go shopping");
-    todoInstance.addTodo("mow lawn");
+    todoInstance.updateSearchTerm("mow lawn");
+    todoInstance.addTodo();
+    todoInstance.updateSearchTerm("go shopping");
+    todoInstance.addTodo();
+    todoInstance.updateSearchTerm("mow lawn");
+    todoInstance.addTodo();
     expect(todo.state().todos.length).toBe(2);
   });
 
