@@ -25,8 +25,25 @@ describe("main Todo component", () => {
 
   it("has a updateSearchTerm method", () => {
     const todo = enzyme.shallow<Todo>(<Todo/>);
-    expect(() => todo.instance().updateSearchTerm()).toBeDefined();
+    expect(todo.instance().updateSearchTerm).toBeDefined();
   });
+
+  it("updates search term in state", () => {
+    const todo = enzyme.shallow<Todo>(<Todo/>);
+    todo.instance().updateSearchTerm("hello");
+    expect(todo.state().todoTerm).toBe("hello");
+  });
+
+  it("has a addTodo method", () => {
+    const todo = enzyme.shallow<Todo>(<Todo/>);
+    expect(todo.instance().addTodo).toBeDefined();
+  });
+
+  it("adds a todo to state", () => {
+    const todo = enzyme.shallow<Todo>(<Todo/>);
+    todo.instance().addTodo("go shopping");
+    expect(todo.state().todos).toContain("go shopping");
+  })
 
   it("renders TodoList component", () => {
     const todo = enzyme.shallow(<Todo/>);

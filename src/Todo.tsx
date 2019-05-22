@@ -18,7 +18,16 @@ class Todo extends React.Component<Props, State> {
     };
   }
 
-  updateSearchTerm = () => undefined;
+  updateSearchTerm = (todoTerm: string) => this.setState({
+    todoTerm
+  });
+
+  addTodo = (newTodo: string) => this.setState({
+    todos: [
+      ...this.state.todos,
+      newTodo
+    ]
+  });
 
   render() {
     return (
