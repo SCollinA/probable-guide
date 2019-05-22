@@ -20,12 +20,14 @@ describe("main Todo component", () => {
 
   it("renders TodoList component", () => {
     const app: enzyme.ShallowWrapper = enzyme.shallow(<Todo/>);
-    expect(app.children(TodoList).exists()).toBe(true);
+    const todoContextProvider = app.children(TodoContext.Provider);
+    expect(todoContextProvider.children(TodoList).exists()).toBe(true);
   });
 
   it("renders TodoSearchAdd component", () => {
     const app: enzyme.ShallowWrapper = enzyme.shallow(<Todo/>);
-    expect(app.children(TodoSearchAdd).exists()).toBe(true);
+    const todoContextProvider = app.children(TodoContext.Provider);
+    expect(todoContextProvider.children(TodoSearchAdd).exists()).toBe(true);
   });
 });
 
