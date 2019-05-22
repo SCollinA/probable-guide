@@ -12,13 +12,29 @@ describe("main Todo component", () => {
     ReactDOM.unmountComponentAtNode(div);
   });
 
+  it("has state", () => {
+    const todo = enzyme.shallow(<Todo/>);
+    expect(todo.state()).toBeDefined();
+  });
+
+  it("has state with list of todos and todoTerm", () => {
+    const todoList = enzyme.shallow(<Todo/>);
+    expect(todoList.state("todos")).toEqual([]);
+    expect(todoList.state("todoTerm")).toEqual("");
+  });
+
+  it("has a updateSearchTerm method", () => {
+    const todo = enzyme.shallow<Todo>(<Todo/>);
+    expect(() => todo.instance().updateSearchTerm()).toBeDefined();
+  });
+
   it("renders TodoList component", () => {
-    const todo: enzyme.ShallowWrapper = enzyme.shallow(<Todo/>);
+    const todo = enzyme.shallow(<Todo/>);
     expect(todo.children(TodoList).exists()).toBe(true);
   });
 
   it("renders TodoSearchAdd component", () => {
-    const todo: enzyme.ShallowWrapper = enzyme.shallow(<Todo/>);
+    const todo = enzyme.shallow(<Todo/>);
     expect(todo.children(TodoSearchAdd).exists()).toBe(true);
   });
 });
