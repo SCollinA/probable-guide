@@ -29,10 +29,10 @@ class Todo extends React.Component<Props, State> {
     if (!this.state.todos.includes(newTodo)) {
       this.setState({
         todos: [
-          ...this.state.todos,
-          newTodo
-        ]
-      });
+            ...this.state.todos,
+            newTodo
+          ]
+      }, () => this.updateSearchTerm(""));
     }
   }
 
