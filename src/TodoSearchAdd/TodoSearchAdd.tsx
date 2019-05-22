@@ -10,7 +10,10 @@ export default ({ addTodo, updateSearchTerm, searchTerm }: Props) => {
     return (
         <form
             className="TodoSearchAdd"
-            onSubmit={() => addTodo && addTodo()}
+            onSubmit={(event) => {
+                event.preventDefault();
+                addTodo && addTodo();
+            }}
         >
             <input
                 type="text"

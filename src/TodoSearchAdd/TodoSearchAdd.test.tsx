@@ -43,7 +43,7 @@ describe("TodoSearchAdd component", () => {
         textInput.simulate("change", { target: { value: "hello" }});
         expect(todo.state().searchTerm).toBe("hello");
     });
-    
+
     it("adds a todo on submit", () => {
         const todo = enzyme.mount<Todo>(<Todo/>);
         const todoSearchAdd = todo.find(TodoSearchAdd);

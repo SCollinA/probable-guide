@@ -119,7 +119,7 @@ describe("main Todo component", () => {
     todoInstance.addTodo();
     expect(todo.state().searchTerm).toBe("");
   });
-  
+
   it("does not contain search results if no search term present", () => {
     const todo = enzyme.shallow<Todo>(<Todo/>);
     const todoInstance = todo.instance();
