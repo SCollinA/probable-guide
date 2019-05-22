@@ -25,12 +25,16 @@ class Todo extends React.Component<Props, State> {
     searchResults: this.state.todos.filter(todo => todo.includes(searchTerm))
   });
 
-  addTodo = (newTodo: string) => this.setState({
-    todos: [
-      ...this.state.todos,
-      newTodo
-    ]
-  });
+  addTodo = (newTodo: string) => {
+    if (!this.state.todos.includes(newTodo)) {
+      this.setState({
+        todos: [
+          ...this.state.todos,
+          newTodo
+        ]
+      });
+    }
+  }
 
   render() {
     const isSearching: boolean = this.state.searchTerm.length > 0;

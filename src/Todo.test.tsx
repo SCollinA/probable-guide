@@ -89,6 +89,15 @@ describe("main Todo component", () => {
     expect(todo.children(TodoList).props().todos).toContain("mow lawn");
     expect(todo.children(TodoList).props().todos).not.toContain("go shopping");
   });
+  
+  it("does not add a todo to state if it already exists", () => {
+    const todo = enzyme.shallow<Todo>(<Todo/>);
+    const todoInstance = todo.instance();
+    todoInstance.addTodo("mow lawn");
+    todoInstance.addTodo("go shopping");
+    todoInstance.addTodo("mow lawn");
+    expect(todo.state().todos.length).toBe(2);
+  })
 });
 
 
