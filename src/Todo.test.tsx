@@ -79,6 +79,16 @@ describe("main Todo component", () => {
     const todo = enzyme.shallow(<Todo/>);
     expect(todo.children(TodoList).props()).toHaveProperty("todos");
   });
+
+  it("passes searchResults from state to TodoList when searching", () => {
+    const todo = enzyme.shallow<Todo>(<Todo/>);
+    const todoInstance = todo.instance();
+    todoInstance.addTodo("mow lawn");
+    todoInstance.addTodo("go shopping");
+    todoInstance.updateSearchTerm("mow");
+    expect(todo.children(TodoList).props().todos).toContain("mow lawn");
+    expect(todo.children(TodoList).props().todos).not.toContain("go shopping");
+  });
 });
 
 

@@ -33,6 +33,7 @@ class Todo extends React.Component<Props, State> {
   });
 
   render() {
+    const isSearching: boolean = this.state.searchTerm.length > 0;
     return (
       <div className="Todo">
           <TodoSearchAdd
@@ -40,7 +41,9 @@ class Todo extends React.Component<Props, State> {
             updateSearchTerm={this.updateSearchTerm}
           />
           <TodoList
-            todos={this.state.todos}
+            todos={isSearching ?
+              this.state.searchResults :
+              this.state.todos}
           />
       </div>
     );
