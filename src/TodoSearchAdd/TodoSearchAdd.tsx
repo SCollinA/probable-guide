@@ -1,9 +1,10 @@
-import React from 'react';
+import React from "react";
 
 export default () => {
     return (
-        <form className='TodoSearchAdd'>
-            <input type='text'/>
+        <form className="TodoSearchAdd">
+            <input type="text"/>
+            <input type="submit"/>
         </form>
     );
-}
+};
