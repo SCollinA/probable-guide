@@ -116,14 +116,15 @@ describe("main Todo component", () => {
     const todo = enzyme.shallow<Todo>(<Todo/>);
     const todoInstance = todo.instance();
     todoInstance.updateSearchTerm("mow lawn");
-    todoInstance.addTodo("mow lawn");
+    todoInstance.addTodo();
     expect(todo.state().searchTerm).toBe("");
   });
-
+  
   it("does not contain search results if no search term present", () => {
     const todo = enzyme.shallow<Todo>(<Todo/>);
     const todoInstance = todo.instance();
-    todoInstance.addTodo("mow lawn");
+    todoInstance.updateSearchTerm("mow lawn");
+    todoInstance.addTodo();
     expect(todo.state().searchResults.length).toBe(0);
   });
 
@@ -131,7 +132,7 @@ describe("main Todo component", () => {
     const todo = enzyme.shallow<Todo>(<Todo/>);
     const todoInstance = todo.instance();
     todoInstance.updateSearchTerm("mow lawn");
-    todoInstance.addTodo("mow lawn");
+    todoInstance.addTodo();
     expect(todo.state().searchResults.length).toBe(0);
   });
 });
