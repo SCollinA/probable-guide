@@ -45,6 +45,7 @@ class Todo extends React.Component<Props, State> {
           <TodoSearchAdd
             addTodo={this.addTodo}
             updateSearchTerm={this.updateSearchTerm}
+            searchTerm={this.state.searchTerm}
           />
           <TodoList
             todos={isSearching ?

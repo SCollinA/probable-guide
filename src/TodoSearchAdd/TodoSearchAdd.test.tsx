@@ -1,5 +1,6 @@
 import React from "react";
 import * as enzyme from "enzyme";
+import Todo from "../Todo";
 import TodoSearchAdd from "./TodoSearchAdd";
 
 describe("TodoSearchAdd component", () => {
@@ -28,7 +29,10 @@ describe("TodoSearchAdd component", () => {
         expect(todoSearchAdd.children('input[type="submit"]').exists()).toBe(true);
     });
 
-    // it("adds a new todo if no search results", () => {
-    //     expect(true).toBe(true);
-    // });
+    it("receives searchTerm as text input value", () => {
+        const todo = enzyme.shallow<Todo>(<Todo/>);
+        const todoSearchAdd = enzyme.shallow(<TodoSearchAdd/>);
+        todo.instance().updateSearchTerm("hello");
+        expect(todoSearchAdd.children('input[type="text"]').prop("value")).toBe("hello");
+    });
 });

@@ -3,9 +3,10 @@ import React from "react";
 interface Props {
     addTodo?: (newTodo: string) => void;
     updateSearchTerm?: (todoTerm: string) => void;
+    searchTerm?: string;
 }
 
-export default (props: Props) => {
+export default ({ addTodo, updateSearchTerm, searchTerm }: Props) => {
     return (
         <form className="TodoSearchAdd">
             <input type="text"/>
