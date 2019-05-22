@@ -4,7 +4,6 @@ import * as enzyme from "enzyme";
 import Todo from "./Todo";
 import TodoList from "./TodoList/TodoList";
 import TodoSearchAdd from "./TodoSearchAdd/TodoSearchAdd";
-import TodoContext from "./Context/TodoContext";
 
 describe("main Todo component", () => {
   it("renders without crashing", () => {
@@ -13,21 +12,14 @@ describe("main Todo component", () => {
     ReactDOM.unmountComponentAtNode(div);
   });
 
-  it("provides TodoContext", () => {
-    const app: enzyme.ShallowWrapper = enzyme.shallow(<Todo/>);
-    expect(app.children(TodoContext.Provider).exists()).toBe(true);
-  });
-
   it("renders TodoList component", () => {
-    const app: enzyme.ShallowWrapper = enzyme.shallow(<Todo/>);
-    const todoContextProvider = app.children(TodoContext.Provider);
-    expect(todoContextProvider.children(TodoList).exists()).toBe(true);
+    const todo: enzyme.ShallowWrapper = enzyme.shallow(<Todo/>);
+    expect(todo.children(TodoList).exists()).toBe(true);
   });
 
   it("renders TodoSearchAdd component", () => {
-    const app: enzyme.ShallowWrapper = enzyme.shallow(<Todo/>);
-    const todoContextProvider = app.children(TodoContext.Provider);
-    expect(todoContextProvider.children(TodoSearchAdd).exists()).toBe(true);
+    const todo: enzyme.ShallowWrapper = enzyme.shallow(<Todo/>);
+    expect(todo.children(TodoSearchAdd).exists()).toBe(true);
   });
 });
 

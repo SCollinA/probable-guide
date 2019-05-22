@@ -8,11 +8,6 @@ describe('TodoSearchAdd component', () => {
         expect(todoSearchAdd.exists()).toBe(true);
     });
     
-    it('consumes the TodoContext', () => {
-        const todoSearchAdd: enzyme.ShallowWrapper = enzyme.shallow(<TodoSearchAdd/>);
-        expect(todoSearchAdd.context()).toBeDefined();
-    })
-
     it('is a form', () => {
         const todoSearchAdd: enzyme.ShallowWrapper = enzyme.shallow(<TodoSearchAdd/>);
         expect(todoSearchAdd.is('form')).toBe(true);

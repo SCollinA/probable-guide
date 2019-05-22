@@ -7,7 +7,7 @@ describe('TodoList component', () => {
         const todoList: enzyme.ShallowWrapper = enzyme.shallow(<TodoList/>);
         expect(todoList.exists()).toBe(true);
     })
-
+        
     it('is a div', () => {
         const todoList: enzyme.ShallowWrapper = enzyme.shallow(<TodoList/>);
         expect(todoList.is('div')).toBe(true);
