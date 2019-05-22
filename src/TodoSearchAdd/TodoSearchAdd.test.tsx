@@ -30,9 +30,17 @@ describe("TodoSearchAdd component", () => {
     });
 
     it("receives searchTerm as text input value", () => {
-        const todo = enzyme.shallow<Todo>(<Todo/>);
-        const todoSearchAdd = enzyme.shallow(<TodoSearchAdd/>);
-        todo.instance().updateSearchTerm("hello");
-        expect(todoSearchAdd.children('input[type="text"]').prop("value")).toBe("hello");
+        const todo = enzyme.mount<Todo>(<Todo/>);
+        const todoSearchAdd = todo.find(TodoSearchAdd);
+        // cannot check except against initial state without onChange function
+        expect(todoSearchAdd.find('input[type="text"]').prop("value")).toBe(todo.state().searchTerm);
+    });
+
+    it("updates search term on change", () => {
+        const todo = enzyme.mount<Todo>(<Todo/>);
+        const todoSearchAdd = todo.find(TodoSearchAdd);
+        const textInput = todoSearchAdd.find('input[type="text"]');
+        textInput.simulate("change", { target: { value: "hello" }});
+        expect(todo.state().searchTerm).toBe("hello");
     });
 });

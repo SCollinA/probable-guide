@@ -9,7 +9,11 @@ interface Props {
 export default ({ addTodo, updateSearchTerm, searchTerm }: Props) => {
     return (
         <form className="TodoSearchAdd">
-            <input type="text"/>
+            <input
+                type="text"
+                value={searchTerm}
+                onChange={({ target: { value }}) => updateSearchTerm && updateSearchTerm(value)}
+            />
             <input type="submit"/>
         </form>
     );
