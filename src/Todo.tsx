@@ -19,7 +19,8 @@ class Todo extends React.Component<Props, State> {
   }
 
   updateSearchTerm = (todoTerm: string) => this.setState({
-    todoTerm
+    todoTerm,
+    todos: this.state.todos.filter(todo => todo.includes(todoTerm))
   });
 
   addTodo = (newTodo: string) => this.setState({

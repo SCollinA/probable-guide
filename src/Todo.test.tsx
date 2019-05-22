@@ -28,6 +28,15 @@ describe("main Todo component", () => {
     expect(todo.instance().updateSearchTerm).toBeDefined();
   });
 
+  it("filters todos by todoTerm", () => {
+    const todo = enzyme.shallow<Todo>(<Todo/>);
+    const todoInstance = todo.instance();
+    todoInstance.addTodo("go shopping");
+    todoInstance.addTodo("mow lawn");
+    todoInstance.updateSearchTerm("mow");
+    expect(todoInstance.state.todos).toEqual(["mow lawn"]);
+  });
+
   it("updates search term in state", () => {
     const todo = enzyme.shallow<Todo>(<Todo/>);
     todo.instance().updateSearchTerm("hello");
