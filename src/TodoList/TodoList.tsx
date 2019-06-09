@@ -3,13 +3,18 @@ import TodoItem from "../TodoItem/TodoItem";
 
 interface Props {
     todos?: string[];
+    removeTodo?: (oldTodo?: string) => void;
 }
 
-export default ({ todos }: Props) => {
+export default ({ todos, removeTodo }: Props) => {
     return (
         <div className="TodoList">
             {todos && todos.map((todo, index) => (
-                <TodoItem key={index} todo={todo}/>
+                <TodoItem
+                    key={index}
+                    todo={todo}
+                    removeTodo={removeTodo}
+                />
             ))}
         </div>
     );

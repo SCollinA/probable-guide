@@ -23,8 +23,4 @@ describe("TodoList component", () => {
         const todoList = enzyme.shallow(<TodoList todos={["mow lawn"]}/>);
         expect(todoList.childAt(0).is(TodoItem)).toBe(true);
     });
-
-    // it("shows an x when mouse hovers over todo", () => {
-    //     expect(true).toBe(true);
-    // });
 });
