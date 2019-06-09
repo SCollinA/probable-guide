@@ -1,6 +1,7 @@
 import React from "react";
 import * as enzyme from "enzyme";
 import TodoList from "./TodoList";
+import TodoItem from "../TodoItem/TodoItem";
 
 describe("TodoList component", () => {
     it("renders without crashing", () => {
@@ -20,6 +21,6 @@ describe("TodoList component", () => {
 
     it("renders todos as h4 elements", () => {
         const todoList = enzyme.shallow(<TodoList todos={["mow lawn"]}/>);
-        expect(todoList.childAt(0).is("h4")).toBe(true);
+        expect(todoList.childAt(0).is(TodoItem)).toBe(true);
     });
 });

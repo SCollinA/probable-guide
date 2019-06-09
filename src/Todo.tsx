@@ -39,6 +39,12 @@ class Todo extends React.Component<Props, State> {
     }
   }
 
+  removeTodo = (oldTodo?: string) => {
+    this.setState({
+      todos: this.state.todos.filter(todo => todo !== oldTodo),
+    });
+  }
+
   render() {
     const isSearching: boolean = this.state.searchTerm.length > 0;
     return (
@@ -52,6 +58,7 @@ class Todo extends React.Component<Props, State> {
             todos={isSearching ?
               this.state.searchResults :
               this.state.todos}
+              removeTodo={this.removeTodo}
           />
       </div>
     );
