@@ -2,8 +2,9 @@ import React from "react";
 import { ListItem, ListItemText, TextField } from "@material-ui/core";
 
 interface IProps {
-    todo?: string;
-    removeTodo?: (oldTodo?: string) => void;
+    todo: string;
+    updateTodo: (oldTodo: string, newTodo: string) => void;
+    removeTodo: (oldTodo?: string) => void;
 }
 
 interface IState {
@@ -37,6 +38,7 @@ export default class extends React.Component<IProps, IState> {
         } = this.state;
         const {
             todo,
+            updateTodo,
             removeTodo
         } = this.props;
         return (
@@ -49,13 +51,14 @@ export default class extends React.Component<IProps, IState> {
                 {isEditing ?
                     <TextField
                         value={todo}
-                        onChange={() => console.log("hey")}
+                        onChange={({ target: { value } }) => updateTodo(todo, value)}
                     /> :
                     <ListItemText>{todo}</ListItemText>
                 }
                 {(isHovered || isEditing) &&
                     <ListItemText
-                        onClick={() => removeTodo && removeTodo(todo)}
+                        className="removeButton"
+                        onClick={() => removeTodo(todo)}
                     >
                         remove
                     </ListItemText>}

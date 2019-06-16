@@ -42,11 +42,9 @@ class Todo extends React.Component<Props, State> {
   updateTodo = (oldTodo: string, newTodo: string) => {
     this.setState({
       todos: this.state.todos.map(todo => {
-        if (todo === oldTodo) {
-          return newTodo;
-        } else {
-          return todo;
-        }
+        return todo === oldTodo ?
+          newTodo :
+          todo;
       }),
     });
   }
@@ -70,7 +68,8 @@ class Todo extends React.Component<Props, State> {
             todos={isSearching ?
               this.state.searchResults :
               this.state.todos}
-              removeTodo={this.removeTodo}
+            updateTodo={this.updateTodo}
+            removeTodo={this.removeTodo}
           />
       </div>
     );
