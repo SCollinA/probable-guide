@@ -27,7 +27,6 @@ describe("TodoItem component", () => {
             todos: ["hello"]
         });
         const todoItem = todo.find("div.TodoItem");
-        console.log(todoItem);
         todoItem.simulate("mouseenter");
         const todoX = todo.find("div.TodoItem").childAt(1);
         todoX.simulate("click");

@@ -2,6 +2,7 @@ import React from "react";
 import * as enzyme from "enzyme";
 import Todo from "../Todo";
 import TodoSearchAdd from "./TodoSearchAdd";
+import { Button } from "@material-ui/core";
 
 describe("TodoSearchAdd component", () => {
     it("renders without crashing", () => {
@@ -20,13 +21,13 @@ describe("TodoSearchAdd component", () => {
     });
 
     it("has a text input", () => {
-        const todoSearchAdd = enzyme.shallow(<TodoSearchAdd/>);
-        expect(todoSearchAdd.children('input[type="text"]').exists()).toBe(true);
+        const todoSearchAdd = enzyme.mount(<TodoSearchAdd/>);
+        expect(todoSearchAdd.find('input[type="text"]').exists()).toBe(true);
     });
 
     it("has a submit button", () => {
-        const todoSearchAdd = enzyme.shallow(<TodoSearchAdd/>);
-        expect(todoSearchAdd.children('input[type="submit"]').exists()).toBe(true);
+        const todoSearchAdd = enzyme.mount(<TodoSearchAdd/>);
+        expect(todoSearchAdd.find(Button).exists()).toBe(true);
     });
 
     it("receives searchTerm as text input value", () => {
