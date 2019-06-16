@@ -135,6 +135,18 @@ describe("main Todo component", () => {
     todoInstance.addTodo();
     expect(todo.state().searchResults.length).toBe(0);
   });
+
+  it("has a updateTodo method", () => {
+    const todo = enzyme.shallow<Todo>(<Todo/>);
+    expect(todo.instance().updateTodo).toBeDefined();
+  });
+
+  it("updates a todo in state", () => {
+    const todo = enzyme.shallow<Todo>(<Todo/>);
+    todo.setState({ todos: [ "hello" ] });
+    todo.instance().updateTodo("hello", "goodbye");
+    expect(todo.state("todos")).toContain("goodbye");
+  });
 });
 
 

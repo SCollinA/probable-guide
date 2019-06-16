@@ -4,19 +4,25 @@ import { List } from "@material-ui/core";
 
 interface Props {
     todos?: string[];
-    removeTodo?: (oldTodo?: string) => void;
+    updateTodo: (oldTodo: string, newTodo: string) => void;
+    removeTodo: (oldTodo?: string) => void;
 }
 
-export default ({ todos, removeTodo }: Props) => {
+export default ({ todos, updateTodo, removeTodo }: Props) => {
+    console.log(todos);
     return (
         <List className="TodoList">
-            {todos && todos.map((todo, index) => (
-                <TodoItem
-                    key={index}
-                    todo={todo}
-                    removeTodo={removeTodo}
-                />
-            ))}
+            {todos && todos.map((todo, index) => {
+                console.log(todo);
+                return (
+                    <TodoItem
+                        key={todo}
+                        todo={todo}
+                        updateTodo={updateTodo}
+                        removeTodo={removeTodo}
+                    />
+                );
+            })}
         </List>
     );
 };

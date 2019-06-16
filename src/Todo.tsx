@@ -8,6 +8,7 @@ interface State {
   todos: string[];
   searchTerm: string;
   searchResults: string[];
+  isSearching: boolean;
 }
 
 class Todo extends React.Component<Props, State> {
@@ -17,6 +18,7 @@ class Todo extends React.Component<Props, State> {
       todos: [],
       searchTerm: "",
       searchResults: [],
+      isSearching: false,
     };
   }
 
@@ -24,8 +26,9 @@ class Todo extends React.Component<Props, State> {
     searchTerm,
     searchResults: searchTerm.length > 0 ?
       this.state.todos.filter(todo => todo.includes(searchTerm)) :
-      []
-  });
+      [],
+    isSearching: searchTerm.length > 0,
+  })
 
   addTodo = () => {
     const newTodo = this.state.searchTerm;
@@ -39,6 +42,16 @@ class Todo extends React.Component<Props, State> {
     }
   }
 
+  updateTodo = (oldTodo: string, newTodo: string) => {
+    this.setState({
+      todos: this.state.todos.map(todo => {
+        return todo === oldTodo ?
+          newTodo :
+          todo;
+      }),
+    }, () => console.log(this.state.todos));
+  }
+
   removeTodo = (oldTodo?: string) => {
     this.setState({
       todos: this.state.todos.filter(todo => todo !== oldTodo),
@@ -46,7 +59,7 @@ class Todo extends React.Component<Props, State> {
   }
 
   render() {
-    const isSearching: boolean = this.state.searchTerm.length > 0;
+    console.log(this.state.isSearching, this.state.searchResults, this.state.todos);
     return (
       <div className="Todo">
           <TodoSearchAdd
@@ -55,10 +68,11 @@ class Todo extends React.Component<Props, State> {
             searchTerm={this.state.searchTerm}
           />
           <TodoList
-            todos={isSearching ?
+            todos={this.state.isSearching ?
               this.state.searchResults :
               this.state.todos}
-              removeTodo={this.removeTodo}
+            updateTodo={this.updateTodo}
+            removeTodo={this.removeTodo}
           />
       </div>
     );
