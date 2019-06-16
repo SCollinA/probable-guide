@@ -19,7 +19,7 @@ export default ({ todo, removeTodo }: IProps) => {
                 <ListItemText
                     onClick={() => removeTodo && removeTodo(todo)}
                 >
-                    x
+                    remove
                 </ListItemText>}
         </ListItem>
     );

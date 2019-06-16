@@ -21,13 +21,13 @@ describe("TodoItem component", () => {
         expect(todoItem.find(ListItem).text()).toBe("hello");
     });
 
-    it("shows an x as second child when todo is hovered", () => {
+    it("shows remove as second child when todo is hovered", () => {
         const todoItem = enzyme.shallow(<TodoItem/>);
         todoItem.simulate("mouseenter");
-        expect(todoItem.childAt(1).text()).toBe("x");
+        expect(todoItem.childAt(1).text()).toBe("remove");
     });
 
-    it("removes todo when x is clicked", () => {
+    it("removes todo when remove is clicked", () => {
         const todo = enzyme.mount(<Todo/>);
         todo.setState({
             todos: ["hello"]
