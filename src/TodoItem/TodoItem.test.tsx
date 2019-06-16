@@ -3,7 +3,7 @@ import React from "react";
 import TodoItem from "./TodoItem";
 import TodoList from "../TodoList/TodoList";
 import Todo from "../Todo";
-import { ListItem } from "@material-ui/core";
+import { ListItem, TextField } from "@material-ui/core";
 
 describe("TodoItem component", () => {
     it("renders without crashing", () => {
@@ -42,5 +42,11 @@ describe("TodoItem component", () => {
     it("has a isEditing state default is false", () => {
         const todoItem = enzyme.shallow(<TodoItem/>);
         expect(todoItem.state("isEditing")).toBe(false);
+    });
+
+    it("renders todo as text input when editing", () => {
+        const todoItem = enzyme.shallow(<TodoItem/>);
+        todoItem.setState({ isEditing: true });
+        expect(todoItem.find(TextField).exists()).toBe(true);
     });
 });

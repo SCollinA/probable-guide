@@ -1,5 +1,5 @@
 import React from "react";
-import { ListItem, ListItemText } from "@material-ui/core";
+import { ListItem, ListItemText, TextField } from "@material-ui/core";
 
 interface IProps {
     todo?: string;
@@ -46,6 +46,13 @@ export default class extends React.Component<IProps, IState> {
                 onClick={() => setIsEditing(!isEditing)}
             >
                 <ListItemText>{todo}</ListItemText>
+                {isEditing ?
+                    <TextField
+                        value={todo}
+                        onChange={() => console.log('hey')}
+                    /> :
+                    undefined
+                }
                 {isHovered &&
                     <ListItemText
                         onClick={() => removeTodo && removeTodo(todo)}
