@@ -45,7 +45,7 @@ class Todo extends React.Component<Props, State> {
   updateTodo = (oldTodo: string, newTodo: string) => {
     this.setState({
       todos: this.state.todos.map(todo => {
-        return todo === oldTodo ?
+        return todo === oldTodo && !this.state.todos.includes(newTodo) ?
           newTodo :
           todo;
       }),
