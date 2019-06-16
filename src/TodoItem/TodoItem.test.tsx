@@ -3,7 +3,7 @@ import React from "react";
 import TodoItem from "./TodoItem";
 import TodoList from "../TodoList/TodoList";
 import Todo from "../Todo";
-import { ListItem, TextField } from "@material-ui/core";
+import { ListItem, TextField, ListItemText } from "@material-ui/core";
 
 describe("TodoItem component", () => {
     it("renders without crashing", () => {
@@ -24,6 +24,12 @@ describe("TodoItem component", () => {
     it("shows remove as second child when todo is hovered", () => {
         const todoItem = enzyme.shallow(<TodoItem/>);
         todoItem.simulate("mouseenter");
+        expect(todoItem.childAt(1).text()).toBe("remove");
+    });
+
+    it("shows remove as second child when todo is editing", () => {
+        const todoItem = enzyme.shallow(<TodoItem/>);
+        todoItem.setState({ isEditing: true });
         expect(todoItem.childAt(1).text()).toBe("remove");
     });
 
@@ -48,5 +54,20 @@ describe("TodoItem component", () => {
         const todoItem = enzyme.shallow(<TodoItem/>);
         todoItem.setState({ isEditing: true });
         expect(todoItem.find(TextField).exists()).toBe(true);
+    });
+
+    it("does not render list item text if editing", () => {
+        const todoItem = enzyme.shallow(<TodoItem todo={"hello"}/>);
+        todoItem.setState({ isEditing: true });
+        expect(todoItem.find(ListItemText).text()).not.toBe("hello");
+    });
+
+    it("updates todo name and stops editing when text input form submitted", () => {
+        const todoItem = enzyme.shallow(<TodoItem todo={"hello"}/>);
+        todoItem.setState({ isEditing: true });
+        const textField = todoItem.find(TextField);
+        textField.simulate("change", "goodbye");
+        textField.simulate("submit");
+        expect(todoItem.state("isEditing")).toBe(false);
     });
 });

@@ -12,6 +12,7 @@ interface IState {
     isEditing: boolean;
     setIsEditing: (isEditing: boolean) => void;
 }
+
 export default class extends React.Component<IProps, IState> {
     constructor(props: IProps) {
         super(props);
@@ -45,15 +46,14 @@ export default class extends React.Component<IProps, IState> {
                 onMouseLeave={() => setIsHovered(false)}
                 onClick={() => setIsEditing(!isEditing)}
             >
-                <ListItemText>{todo}</ListItemText>
                 {isEditing ?
                     <TextField
                         value={todo}
-                        onChange={() => console.log('hey')}
+                        onChange={() => console.log("hey")}
                     /> :
-                    undefined
+                    <ListItemText>{todo}</ListItemText>
                 }
-                {isHovered &&
+                {(isHovered || isEditing) &&
                     <ListItemText
                         onClick={() => removeTodo && removeTodo(todo)}
                     >
