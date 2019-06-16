@@ -38,4 +38,9 @@ describe("TodoItem component", () => {
         todoX.simulate("click");
         expect(todoItem.prop("todo")).not.toBeDefined();
     });
+
+    it("has a isEditing state default is false", () => {
+        const todoItem = enzyme.shallow(<TodoItem/>);
+        expect(todoItem.state("isEditing")).toBe(false);
+    });
 });

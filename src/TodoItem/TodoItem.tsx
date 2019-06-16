@@ -6,21 +6,53 @@ interface IProps {
     removeTodo?: (oldTodo?: string) => void;
 }
 
-export default ({ todo, removeTodo }: IProps) => {
-    const [isHovered, setIsHovered] = React.useState(false);
-    return (
-        <ListItem
-            className="TodoItem"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-        >
-            <ListItemText>{todo}</ListItemText>
-            {isHovered &&
-                <ListItemText
-                    onClick={() => removeTodo && removeTodo(todo)}
-                >
-                    remove
-                </ListItemText>}
-        </ListItem>
-    );
-};
+interface IState {
+    isHovered: boolean;
+    setIsHovered: (isMousedOver: boolean) => void;
+    isEditing: boolean;
+    setIsEditing: (isEditing: boolean) => void;
+}
+export default class extends React.Component<IProps, IState> {
+    constructor(props: IProps) {
+        super(props);
+        this.state = {
+            isHovered: false,
+            setIsHovered: (isMousedOver: boolean) => this.setState({
+                isHovered: isMousedOver,
+            }),
+            isEditing: false,
+            setIsEditing: (isEditing: boolean) => this.setState({
+                isEditing
+            }),
+        };
+    }
+
+    render() {
+        const {
+            isHovered,
+            setIsHovered,
+            isEditing,
+            setIsEditing
+        } = this.state;
+        const {
+            todo,
+            removeTodo
+        } = this.props;
+        return (
+            <ListItem
+                className="TodoItem"
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+                onClick={() => setIsEditing(!isEditing)}
+            >
+                <ListItemText>{todo}</ListItemText>
+                {isHovered &&
+                    <ListItemText
+                        onClick={() => removeTodo && removeTodo(todo)}
+                    >
+                        remove
+                    </ListItemText>}
+            </ListItem>
+        );
+    }
+}
