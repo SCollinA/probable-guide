@@ -1,5 +1,6 @@
 import React from "react";
 import TodoItem from "../TodoItem/TodoItem";
+import { List } from "@material-ui/core";
 
 interface Props {
     todos?: string[];
@@ -8,7 +9,7 @@ interface Props {
 
 export default ({ todos, removeTodo }: Props) => {
     return (
-        <div className="TodoList">
+        <List className="TodoList">
             {todos && todos.map((todo, index) => (
                 <TodoItem
                     key={index}
@@ -16,6 +17,6 @@ export default ({ todos, removeTodo }: Props) => {
                     removeTodo={removeTodo}
                 />
             ))}
-        </div>
+        </List>
     );
 };

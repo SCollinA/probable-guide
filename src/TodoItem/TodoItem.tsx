@@ -1,4 +1,5 @@
 import React from "react";
+import { ListItem, ListItemText } from "@material-ui/core";
 
 interface IProps {
     todo?: string;
@@ -8,18 +9,18 @@ interface IProps {
 export default ({ todo, removeTodo }: IProps) => {
     const [isHovered, setIsHovered] = React.useState(false);
     return (
-        <div
+        <ListItem
             className="TodoItem"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
-            <h4>{todo}</h4>
+            <ListItemText>{todo}</ListItemText>
             {isHovered &&
-                <h4
+                <ListItemText
                     onClick={() => removeTodo && removeTodo(todo)}
                 >
-                    x
-                </h4>}
-        </div>
+                    remove
+                </ListItemText>}
+        </ListItem>
     );
 };

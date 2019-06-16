@@ -1,4 +1,6 @@
 import React from "react";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 
 interface Props {
     addTodo?: () => void;
@@ -15,12 +17,12 @@ export default ({ addTodo, updateSearchTerm, searchTerm }: Props) => {
                 addTodo && addTodo();
             }}
         >
-            <input
+            <TextField
                 type="text"
                 value={searchTerm}
                 onChange={({ target: { value }}) => updateSearchTerm && updateSearchTerm(value)}
             />
-            <input type="submit"/>
+            <Button type="submit">submit</Button>
         </form>
     );
 };
