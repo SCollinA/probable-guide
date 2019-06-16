@@ -20,7 +20,7 @@ export default class extends React.Component<IProps, IState> {
     constructor(props: IProps) {
         super(props);
         this.state = {
-            todo: props.todo,
+            todo: this.props.todo,
             isHovered: false,
             setIsHovered: (isMousedOver: boolean) => this.setState({
                 isHovered: isMousedOver,
@@ -28,16 +28,21 @@ export default class extends React.Component<IProps, IState> {
             isEditing: false,
             setIsEditing: (isEditing: boolean) => this.setState({
                 isEditing
+            }, () => {
+                if (!this.state.isEditing) {
+                    this.setState({
+                        todo: this.props.todo,
+                    });
+                }
             }),
             editTodo: (todo: string) => this.setState({
                 todo
-            }),
+            }, () => console.log("new todo", this.state.todo)),
         };
     }
 
     render() {
         const {
-            todo,
             isHovered,
             setIsHovered,
             isEditing,
@@ -45,6 +50,7 @@ export default class extends React.Component<IProps, IState> {
             editTodo
         } = this.state;
         const {
+            todo,
             updateTodo,
             removeTodo
         } = this.props;
@@ -59,14 +65,15 @@ export default class extends React.Component<IProps, IState> {
                     (<form
                         onSubmit={(event) => {
                             event.preventDefault();
-                            updateTodo(this.props.todo, todo);
+                            updateTodo(todo, this.state.todo);
                             setIsEditing(false);
                         }}
                     >
                         <TextField
                             name="todoName"
-                            value={todo}
+                            value={this.state.todo}
                             onChange={({ target: { value } }) => editTodo(value)}
+                            autoFocus
                         />
                     </form>) :
                     <ListItemText>{todo}</ListItemText>
