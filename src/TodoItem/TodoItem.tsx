@@ -8,16 +8,19 @@ interface IProps {
 }
 
 interface IState {
+    todo: string;
     isHovered: boolean;
     setIsHovered: (isMousedOver: boolean) => void;
     isEditing: boolean;
     setIsEditing: (isEditing: boolean) => void;
+    editTodo: (todo: string) => void;
 }
 
 export default class extends React.Component<IProps, IState> {
     constructor(props: IProps) {
         super(props);
         this.state = {
+            todo: props.todo,
             isHovered: false,
             setIsHovered: (isMousedOver: boolean) => this.setState({
                 isHovered: isMousedOver,
@@ -26,18 +29,22 @@ export default class extends React.Component<IProps, IState> {
             setIsEditing: (isEditing: boolean) => this.setState({
                 isEditing
             }),
+            editTodo: (todo: string) => this.setState({
+                todo
+            }),
         };
     }
 
     render() {
         const {
+            todo,
             isHovered,
             setIsHovered,
             isEditing,
-            setIsEditing
+            setIsEditing,
+            editTodo
         } = this.state;
         const {
-            todo,
             updateTodo,
             removeTodo
         } = this.props;
@@ -49,10 +56,19 @@ export default class extends React.Component<IProps, IState> {
                 onClick={() => setIsEditing(!isEditing)}
             >
                 {isEditing ?
-                    <TextField
-                        value={todo}
-                        onChange={({ target: { value } }) => updateTodo(todo, value)}
-                    /> :
+                    (<form
+                        onSubmit={(event) => {
+                            event.preventDefault();
+                            updateTodo(this.props.todo, todo);
+                            setIsEditing(false);
+                        }}
+                    >
+                        <TextField
+                            name="todoName"
+                            value={todo}
+                            onChange={({ target: { value } }) => editTodo(value)}
+                        />
+                    </form>) :
                     <ListItemText>{todo}</ListItemText>
                 }
                 {(isHovered || isEditing) &&
