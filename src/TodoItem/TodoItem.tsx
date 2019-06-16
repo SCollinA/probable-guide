@@ -3,7 +3,7 @@ import { ListItem, ListItemText, TextField } from "@material-ui/core";
 
 interface IProps {
     todo: string;
-    updateTodo: (oldTodo: string, newTodo: string) => void;
+    updateTodo: (oldTodo: string, newTodo: string) => boolean;
     removeTodo: (oldTodo?: string) => void;
 }
 
@@ -65,8 +65,8 @@ export default class extends React.Component<IProps, IState> {
                     (<form
                         onSubmit={(event) => {
                             event.preventDefault();
-                            updateTodo(todo, this.state.todo);
-                            setIsEditing(false);
+                            const updateSuccess = updateTodo(todo, this.state.todo);
+                            setIsEditing(!updateSuccess);
                         }}
                     >
                         <TextField

@@ -4,7 +4,7 @@ import { List } from "@material-ui/core";
 
 interface Props {
     todos?: string[];
-    updateTodo: (oldTodo: string, newTodo: string) => void;
+    updateTodo: (oldTodo: string, newTodo: string) => boolean;
     removeTodo: (oldTodo?: string) => void;
 }
 
