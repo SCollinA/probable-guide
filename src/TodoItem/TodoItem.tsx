@@ -1,5 +1,6 @@
 import React from "react";
 import { ListItem, ListItemText, TextField } from "@material-ui/core";
+import "./TodoItem.css";
 
 interface IProps {
     todo: string;
@@ -14,6 +15,8 @@ interface IState {
     isEditing: boolean;
     setIsEditing: (isEditing: boolean) => void;
     editTodo: (todo: string) => void;
+    isMoving: boolean;
+    setIsMoving: (isMoving: boolean) => void;
 }
 
 export default class extends React.Component<IProps, IState> {
@@ -26,18 +29,24 @@ export default class extends React.Component<IProps, IState> {
                 isHovered: isMousedOver,
             }),
             isEditing: false,
-            setIsEditing: (isEditing: boolean) => this.setState({
-                isEditing
-            }, () => {
-                if (!this.state.isEditing) {
-                    this.setState({
-                        todo: this.props.todo,
-                    });
-                }
-            }),
+            setIsEditing: (isEditing: boolean) => {
+                this.setState({
+                    isEditing
+                }, () => {
+                    if (!this.state.isEditing) {
+                        this.setState({
+                            todo: this.props.todo,
+                        });
+                    }
+                });
+            },
             editTodo: (todo: string) => this.setState({
                 todo
-            }, () => console.log("new todo", this.state.todo)),
+            }),
+            isMoving: false,
+            setIsMoving: (isMoving: boolean) => this.setState({
+                isMoving
+            }),
         };
     }
 
@@ -47,7 +56,9 @@ export default class extends React.Component<IProps, IState> {
             setIsHovered,
             isEditing,
             setIsEditing,
-            editTodo
+            editTodo,
+            //isMoving,
+            setIsMoving
         } = this.state;
         const {
             todo,
@@ -60,9 +71,11 @@ export default class extends React.Component<IProps, IState> {
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
                 onClick={() => setIsEditing(!isEditing)}
+                onMouseDown={() => setIsMoving(true)}
             >
                 {isEditing ?
                     (<form
+                        className="TodoItemForm"
                         onSubmit={(event) => {
                             event.preventDefault();
                             const updateSuccess = updateTodo(todo, this.state.todo);

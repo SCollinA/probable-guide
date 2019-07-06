@@ -51,7 +51,7 @@ class Todo extends React.Component<Props, State> {
             newTodo :
             todo;
         }),
-      }, () => console.log(this.state.todos));
+      });
     }
     return !todoTaken;
   }
@@ -63,7 +63,6 @@ class Todo extends React.Component<Props, State> {
   }
 
   render() {
-    console.log(this.state.isSearching, this.state.searchResults, this.state.todos);
     return (
       <div className="Todo">
           <TodoSearchAdd

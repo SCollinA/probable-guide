@@ -9,11 +9,9 @@ interface Props {
 }
 
 export default ({ todos, updateTodo, removeTodo }: Props) => {
-    console.log(todos);
     return (
         <List className="TodoList">
             {todos && todos.map((todo, index) => {
-                console.log(todo);
                 return (
                     <TodoItem
                         key={todo}

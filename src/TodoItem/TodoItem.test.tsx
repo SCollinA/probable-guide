@@ -85,8 +85,18 @@ describe("TodoItem component", () => {
         const todoItem = todo.find(TodoItem);
         todoItem.simulate("click");
         const textField = todo.find(TextField).at(1);
-        textField.simulate("change", "goodbye");
-        textField.simulate("submit");
-        expect(todoItem.state("isEditing")).toBe(false);
+        textField.find("input").simulate("change", { target: { value: "goodbye" } } );
+        todo.find("form.TodoItemForm").simulate("submit");
+        expect(todo.find(TodoItem).state("isEditing")).toBe(false);
+    });
+
+    it("has an isMoving state which is true when todo is grabbed", () => {
+        const todo = enzyme.mount(<Todo/>);
+        todo.setState({ todos: ["hello"] });
+        const todoItem = todo.find(TodoItem);
+        expect(todoItem.state("isMoving")).toBeDefined();
+        todoItem.simulate("mousedown");
+        expect(todoItem.state("isMoving")).toBe(true);
+        todoItem
     });
 });

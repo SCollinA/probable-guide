@@ -1,0 +1,11 @@
+.TodoItem {
+    cursor: grab;
+}
+
+.TodoItem:active {
+    cursor: grabbing;
+}
+
+.removeButton {
+    cursor: pointer;
+}
