@@ -17,6 +17,9 @@ interface IState {
     editTodo: (todo: string) => void;
     isMoving: boolean;
     setIsMoving: (isMoving: boolean) => void;
+    mouseX: number;
+    mouseY: number;
+    setMouseLocation: (mouseX: number, mouseY: number) => void;
 }
 
 export default class extends React.Component<IProps, IState> {
@@ -47,6 +50,12 @@ export default class extends React.Component<IProps, IState> {
             setIsMoving: (isMoving: boolean) => this.setState({
                 isMoving
             }),
+            mouseX: 0,
+            mouseY: 0,
+            setMouseLocation: (mouseX: number, mouseY: number) => this.setState({
+                mouseX,
+                mouseY
+            }),
         };
     }
 
@@ -57,8 +66,11 @@ export default class extends React.Component<IProps, IState> {
             isEditing,
             setIsEditing,
             editTodo,
-            //isMoving,
-            setIsMoving
+            isMoving,
+            setIsMoving,
+            mouseX,
+            mouseY,
+            setMouseLocation
         } = this.state;
         const {
             todo,
@@ -68,11 +80,19 @@ export default class extends React.Component<IProps, IState> {
         return (
             <ListItem
                 className="TodoItem"
+                style={isMoving ? {
+                        position: "absolute",
+                        top: mouseY - 20,
+                        left: mouseX - 50,
+                    } :
+                    {}
+                }
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
                 onClick={() => setIsEditing(!isEditing)}
                 onMouseDown={() => setIsMoving(true)}
                 onMouseUp={() => setIsMoving(false)}
+                onMouseMove={(event) => isMoving && setMouseLocation(event.clientX, event.clientY)}
             >
                 {isEditing ?
                     (<form

@@ -93,11 +93,28 @@ describe("TodoItem component", () => {
     it("has an isMoving state which is true when todo is grabbed", () => {
         const todo = enzyme.mount(<Todo/>);
         todo.setState({ todos: ["hello"] });
-        const todoItem = todo.find(TodoItem);
+        let todoItem = todo.find(TodoItem);
         expect(todoItem.state("isMoving")).toBeDefined();
         todoItem.simulate("mousedown");
         expect(todoItem.state("isMoving")).toBe(true);
+        todoItem = todo.find(TodoItem);
+        // expect(todo.find(ListItem).hasClass("isMoving")).toBe(true);
+        expect(todoItem.render().css("position")).toBe("absolute");
         todoItem.simulate("mouseup");
         expect(todoItem.state("isMoving")).toBe(false);
+    });
+
+    it("updates the mouse position when isMoving", () => {
+        const todo = enzyme.mount(<Todo/>);
+        todo.setState({ todos: ["hello"] });
+        let todoItem = todo.find(TodoItem);
+        expect(todoItem.state("mouseX")).toBeDefined();
+        expect(todoItem.state("mouseY")).toBeDefined();
+        expect(todoItem.state("setMouseLocation")).toBeDefined();
+        todoItem.simulate("mousedown");
+        expect(todoItem.state("mouseX")).toBeTruthy();
+        expect(todoItem.state("mouseY")).toBeTruthy();
+        todoItem = todo.find(TodoItem);
+        expect(todoItem.render().css("top")).toBe(todoItem.state("mouseY"));
     });
 });
