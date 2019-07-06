@@ -97,6 +97,7 @@ describe("TodoItem component", () => {
         expect(todoItem.state("isMoving")).toBeDefined();
         todoItem.simulate("mousedown");
         expect(todoItem.state("isMoving")).toBe(true);
-        todoItem
+        todoItem.simulate("mouseup");
+        expect(todoItem.state("isMoving")).toBe(false);
     });
 });

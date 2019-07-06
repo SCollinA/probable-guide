@@ -72,6 +72,7 @@ export default class extends React.Component<IProps, IState> {
                 onMouseLeave={() => setIsHovered(false)}
                 onClick={() => setIsEditing(!isEditing)}
                 onMouseDown={() => setIsMoving(true)}
+                onMouseUp={() => setIsMoving(false)}
             >
                 {isEditing ?
                     (<form
