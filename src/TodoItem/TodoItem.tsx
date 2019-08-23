@@ -82,8 +82,8 @@ export default class extends React.Component<IProps, IState> {
                 className="TodoItem"
                 style={isMoving ? {
                         position: "absolute",
-                        top: mouseY - 20,
-                        left: mouseX - 50,
+                        top: mouseY && mouseY - 20,
+                        left: mouseX && mouseX - 50,
                     } :
                     {}
                 }

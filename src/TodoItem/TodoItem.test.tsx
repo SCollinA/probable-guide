@@ -112,9 +112,11 @@ describe("TodoItem component", () => {
         expect(todoItem.state("mouseY")).toBeDefined();
         expect(todoItem.state("setMouseLocation")).toBeDefined();
         todoItem.simulate("mousedown");
+        todoItem.simulate("mousemove", { clientX: 100, clientY: 100 });
+        todo.update();
         expect(todoItem.state("mouseX")).toBeTruthy();
         expect(todoItem.state("mouseY")).toBeTruthy();
         todoItem = todo.find(TodoItem);
-        expect(todoItem.render().css("top")).toBe(todoItem.state("mouseY"));
+        expect(todoItem.render().css("top")).toBe(`${todoItem.state("mouseY") - 20}px`);
     });
 });
