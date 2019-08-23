@@ -84,6 +84,7 @@ export default class extends React.Component<IProps, IState> {
                         position: "absolute",
                         top: mouseY && mouseY - 20,
                         left: mouseX && mouseX - 50,
+                        cursor: "grabbing",
                     } :
                     {}
                 }

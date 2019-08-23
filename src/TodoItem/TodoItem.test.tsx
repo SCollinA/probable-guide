@@ -107,7 +107,7 @@ describe("TodoItem component", () => {
     it("updates the mouse position when isMoving", () => {
         const todo = enzyme.mount(<Todo/>);
         todo.setState({ todos: ["hello"] });
-        let todoItem = todo.find(TodoItem);
+        const todoItem = todo.find(TodoItem);
         expect(todoItem.state("mouseX")).toBeDefined();
         expect(todoItem.state("mouseY")).toBeDefined();
         expect(todoItem.state("setMouseLocation")).toBeDefined();
@@ -116,7 +116,16 @@ describe("TodoItem component", () => {
         todo.update();
         expect(todoItem.state("mouseX")).toBeTruthy();
         expect(todoItem.state("mouseY")).toBeTruthy();
-        todoItem = todo.find(TodoItem);
         expect(todoItem.render().css("top")).toBe(`${todoItem.state("mouseY") - 20}px`);
+    });
+
+    it("shows a grabbing mouse when isMoving", () => {
+        const todo = enzyme.mount(<Todo/>);
+        todo.setState({ todos: ["hello"] });
+        const todoItem = todo.find(TodoItem);
+        todoItem.simulate("mousedown");
+        todoItem.simulate("mousemove", { clientX: 100, clientY: 100 });
+        todo.update();
+        expect(todoItem.render().css("cursor")).toBe("grabbing");
     });
 });
